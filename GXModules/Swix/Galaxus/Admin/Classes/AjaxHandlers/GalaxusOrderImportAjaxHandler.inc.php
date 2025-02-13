@@ -9,6 +9,10 @@ class GalaxusOrderImportAjaxHandler extends AjaxHandler
 
     public function proceed()
     {
+		if(defined('SHOP_OFFLINE') && SHOP_OFFLINE === true) {
+			return;
+		}
+		
         /** @var GalaxusImportOrders $galaxusImportOrders */
         $galaxusImportOrders = MainFactory::create('GalaxusImportOrders');
         $galaxusImportOrders->import();

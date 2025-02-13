@@ -9,6 +9,10 @@ class GalaxusArticleExportAjaxHandler extends AjaxHandler
 
     public function proceed()
     {
+		if(defined('SHOP_OFFLINE') && SHOP_OFFLINE === true) {
+			return;
+		}
+    	
         if (!defined('HTTPS_CATALOG_SERVER')) {
             define('HTTPS_CATALOG_SERVER', HTTPS_SERVER);
         }
