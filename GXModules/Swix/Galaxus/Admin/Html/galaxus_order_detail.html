@@ -1,0 +1,21 @@
+{load_language_text section="swix_galaxus_order_detail"}
+
+<div class="grid control-group">
+    <div class="span2">
+        <label>{$txt.label_delivery_note_requested}</label>
+    </div>
+    <div class="span4">
+        <b>
+        {if $delivery_note_requested}
+            {$txt.value_yes}
+        {else}
+            {$txt.value_no}
+        {/if}</b>
+    </div>
+    <div class="span2">
+        <label>{$txt.label_customer_notes}</label>
+    </div>
+    <div class="span4">
+        <b>{$comment}</b>
+    </div>
+</div>

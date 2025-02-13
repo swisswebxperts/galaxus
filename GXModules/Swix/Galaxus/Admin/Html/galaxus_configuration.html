@@ -1,0 +1,486 @@
+{extends file="get_usermod:layouts/main/layout.html"}
+
+{block name="content"}
+    {load_language_text section="swix_galaxus_configuration"}
+    {load_language_text section="buttons" name="btn"}
+
+    <div class="breakpoint-small" data-gxmodules-namespace="{$base_url}/GXModules/Swix/Galaxus/Admin/Javascript">
+        <form method="post" action="admin.php?do=Galaxus/SaveConfiguration" id="galaxus-configuration-form" class="form-horizontal galaxus-configuration-form" enctype="multipart/form-data" data-gx-extension="visibility_switcher">
+            <input type="hidden" name="pageToken" value="{$content.pageToken}">
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a role="tab" data-toggle="tab" href="#tab-settings">{$txt.tab_title_article_export}</a>
+                </li>
+                <li role="presentation">
+                    <a role="tab" data-toggle="tab" href="#tab-categories">{$txt.tab_title_order_import}</a>
+                </li>
+            </ul>
+            <!-- Products Export -->
+            <div class="tab-content">
+                <div role="tabpanel"
+                     class="tab-pane fade in active"
+                     id="tab-settings">
+
+                    <h3>&nbsp;</h3>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/active]" class="col-md-6">
+                            {$txt.product_export_label_enable}
+                        </label>
+
+                        <div class="col-md-4">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[product_export/active]" value="0" />
+                                <input type="checkbox" id="configuration[product_export/active]" value="1" name="configuration[product_export/active]" class="form-control" {($content.configuration['product_export/active'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span class="tooltip-icon" data-gx-widget="tooltip_icon" data-tooltip_icon-type="info">{$txt.product_export_tooltip_enable}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/testmode]" class="col-md-6">
+                            {$txt.product_export_label_testmode}
+                        </label>
+
+                        <div class="col-md-4">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[product_export/testmode]" value="0" />
+                                <input type="checkbox" id="configuration[product_export/testmode]" value="1" name="configuration[product_export/testmode]" class="form-control" {($content.configuration['product_export/testmode'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span class="tooltip-icon" data-gx-widget="tooltip_icon" data-tooltip_icon-type="info">{$txt.product_export_tooltip_testmode}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/temporary_disabled]" class="col-md-6">
+                            {$txt.product_export_label_temporary_disabled}
+                        </label>
+
+                        <div class="col-md-4">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[product_export/temporary_disabled]" value="0" />
+                                <input type="checkbox" id="configuration[product_export/temporary_disabled]" value="1" name="configuration[product_export/temporary_disabled]" class="form-control" {($content.configuration['product_export/temporary_disabled'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span class="tooltip-icon" data-gx-widget="tooltip_icon" data-tooltip_icon-type="info">{$txt.product_export_tooltip_temporary_disabled}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/ftp/enable]" class="col-md-6">
+                            {$txt.product_export_label_ftp_enable}
+                        </label>
+
+                        <div class="col-md-6">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[product_export/ftp/enable]" value="0" />
+                                <input type="checkbox" id="configuration[product_export/ftp/enable]" value="1" name="configuration[product_export/ftp/enable]" class="form-control" {($content.configuration['product_export/ftp/enable'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/ftp/server]" class="col-md-6">
+                            {$txt.product_export_label_ftp_server}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[product_export/ftp/server]"
+                                   id="configuration[product_export/ftp/server]" value="{$content.configuration['product_export/ftp/server']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/ftp/port]" class="col-md-6">
+                            {$txt.product_export_label_ftp_port}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[product_export/ftp/port]"
+                                   id="configuration[product_export/ftp/port]" value="{$content.configuration['product_export/ftp/port']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/ftp/username]" class="col-md-6">
+                            {$txt.product_export_label_ftp_username}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[product_export/ftp/username]"
+                                   id="configuration[product_export/ftp/username]" value="{$content.configuration['product_export/ftp/username']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/ftp/password]" class="col-md-6">
+                            {$txt.product_export_label_ftp_password}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[product_export/ftp/password]"
+                                   id="configuration[product_export/ftp/password]" value="{$content.configuration['product_export/ftp/password']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/ftp/folder_prod]" class="col-md-6">
+                            {$txt.product_export_label_ftp_folder_prod}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[product_export/ftp/folder_prod]"
+                                   id="configuration[product_export/ftp/folder_prod]" value="{$content.configuration['product_export/ftp/folder_prod']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/ftp/folder_test]" class="col-md-6">
+                            {$txt.product_export_label_ftp_folder_test}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[product_export/ftp/folder_test]"
+                                   id="configuration[product_export/ftp/folder_test]" value="{$content.configuration['product_export/ftp/folder_test']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/file_suffix]" class="col-md-6">
+                            {$txt.product_export_label_file_suffix}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[product_export/file_suffix]"
+                                   id="configuration[product_export/file_suffix]" value="{$content.configuration['product_export/file_suffix']}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/brand_name]" class="col-md-6">
+                            {$txt.product_export_label_brand_name}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[product_export/brand_name]"
+                                   id="configuration[product_export/brand_name]" value="{$content.configuration['product_export/brand_name']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/currency]" class="col-md-6">
+                            {$txt.product_export_label_currency}
+                        </label>
+
+                        <div class="col-md-6">
+                            <select class="form-control" name="configuration[product_export/currency]" id="configuration[product_export/currency]">
+                                {foreach item=currency from=$content.currencies}
+                                    <option value="{$currency['code']}" {if $currency['code'] == $content.configuration['product_export/currency']}selected="selected"{/if} >{$currency['code']}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[product_export/round_5_cent]" class="col-md-6">
+                            {$txt.product_export_label_round_5_cent}
+                        </label>
+
+                        <div class="col-md-6">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[product_export/round_5_cent]" value="0" />
+                                <input type="checkbox" id="configuration[product_export/round_5_cent]" value="1" name="configuration[product_export/round_5_cent]" class="form-control" {($content.configuration['product_export/round_5_cent'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label class="col-md-6">
+                            {$txt.product_export_label_shipping_costs}
+                        </label>
+
+                        <div class="col-md-3">
+                            <b>{$txt.product_export_label_shipping_costs_price}</b>
+                            {for $index=0 to 5}
+                                <input type="text" class="form-control" name="configuration[product_export/shipping][{$index}][]"
+                                       value="{$content.configuration['product_export/shipping'].$index.0}">
+                            {/for}
+                        </div>
+                        <div class="col-md-3">
+                            <b>{$txt.product_export_label_shipping_costs_value}</b>
+                            {for $index=0 to 5}
+                                <input type="text" class="form-control" name="configuration[product_export/shipping][{$index}][]"
+                                       value="{$content.configuration['product_export/shipping'].$index.1}">
+                            {/for}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Import -->
+                <div role="tabpanel"
+                     class="tab-pane fade in"
+                     id="tab-categories">
+
+                    <h3>&nbsp;</h3>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/active]" class="col-md-6">
+                            {$txt.order_import_label_enable}
+                        </label>
+
+                        <div class="col-md-4">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[order_import/active]" value="0" />
+                                <input type="checkbox" id="configuration[order_import/active]" value="1" name="configuration[order_import/active]" class="form-control" {($content.configuration['order_import/active'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span class="tooltip-icon" data-gx-widget="tooltip_icon" data-tooltip_icon-type="info">{$txt.order_import_tooltip_enable}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/testmode]" class="col-md-6">
+                            {$txt.order_import_label_testmode}
+                        </label>
+
+                        <div class="col-md-4">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[order_import/testmode]" value="0" />
+                                <input type="checkbox" id="configuration[order_import/testmode]" value="1" name="configuration[order_import/testmode]" class="form-control" {($content.configuration['order_import/testmode'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span class="tooltip-icon" data-gx-widget="tooltip_icon" data-tooltip_icon-type="info">{$txt.order_import_tooltip_testmode}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/ftp/server]" class="col-md-6">
+                            {$txt.order_import_label_ftp_server}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[order_import/ftp/server]"
+                                   id="configuration[order_import/ftp/server]" value="{$content.configuration['order_import/ftp/server']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/ftp/port]" class="col-md-6">
+                            {$txt.order_import_label_ftp_port}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[order_import/ftp/port]"
+                                   id="configuration[order_import/ftp/port]" value="{$content.configuration['order_import/ftp/port']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/ftp/username]" class="col-md-6">
+                            {$txt.order_import_label_ftp_username}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[order_import/ftp/username]"
+                                   id="configuration[order_import/ftp/username]" value="{$content.configuration['order_import/ftp/username']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/ftp/password]" class="col-md-6">
+                            {$txt.order_import_label_ftp_password}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[order_import/ftp/password]"
+                                   id="configuration[order_import/ftp/password]" value="{$content.configuration['order_import/ftp/password']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/ftp/folder_prod]" class="col-md-6">
+                            {$txt.order_import_label_ftp_folder_prod}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[order_import/ftp/folder_prod]"
+                                   id="configuration[order_import/ftp/folder_prod]" value="{$content.configuration['order_import/ftp/folder_prod']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/ftp/folder_test]" class="col-md-6">
+                            {$txt.order_import_label_ftp_folder_test}
+                        </label>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="configuration[order_import/ftp/folder_test]"
+                                   id="configuration[order_import/ftp/folder_test]" value="{$content.configuration['order_import/ftp/folder_test']}">
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/order_status]" class="col-md-6">
+                            {$txt.order_import_label_order_status}
+                        </label>
+
+                        <div class="col-md-6">
+                            <select class="form-control" name="configuration[order_import/order_status]" id="configuration[order_import/order_status]">
+                                {foreach item=order_status from=$content.order_statuses}
+                                    <option value="{$order_status['orders_status_id']}" style="background:#{$order_status['color']};color:white;" {if $order_status['orders_status_id'] == $content.configuration['order_import/order_status']}selected="selected"{/if} >{$order_status['orders_status_name']}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/send_email_confirmation]" class="col-md-6">
+                            {$txt.order_import_label_send_email_confirmation}
+                        </label>
+
+                        <div class="col-md-6">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[order_import/send_email_confirmation]" value="0" />
+                                <input type="checkbox" id="configuration[order_import/send_email_confirmation]" value="1" name="configuration[order_import/send_email_confirmation]" class="form-control" {($content.configuration['order_import/send_email_confirmation'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/send_order_response]" class="col-md-6">
+                            {$txt.order_import_label_send_order_response}
+                        </label>
+
+                        <div class="col-md-6">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[order_import/send_order_response]" value="0" />
+                                <input type="checkbox" id="configuration[order_import/send_order_response]" value="1" name="configuration[order_import/send_order_response]" class="form-control" {($content.configuration['order_import/send_order_response'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/send_dispatch_notification]" class="col-md-6">
+                            {$txt.order_import_label_send_dispatch_notification}
+                        </label>
+
+                        <div class="col-md-6">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[order_import/send_dispatch_notification]" value="0" />
+                                <input type="checkbox" id="configuration[order_import/send_dispatch_notification]" value="1" name="configuration[order_import/send_dispatch_notification]" class="form-control" {($content.configuration['order_import/send_dispatch_notification'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/dispatch_notification_order_status]" class="col-md-6">
+                            {$txt.order_import_label_dispatch_notification_order_status}
+                        </label>
+
+                        <div class="col-md-6">
+                            <select class="form-control" name="configuration[order_import/dispatch_notification_order_status]" id="configuration[order_import/dispatch_notification_order_status]">
+                                {foreach item=order_status from=$content.order_statuses}
+                                    <option value="{$order_status['orders_status_id']}" style="background:#{$order_status['color']};color:white;" {if $order_status['orders_status_id'] == $content.configuration['order_import/dispatch_notification_order_status']}selected="selected"{/if} >{$order_status['orders_status_name']}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group visibility_switcher">
+                        <label for="configuration[order_import/send_cancellation_notification]" class="col-md-6">
+                            {$txt.order_import_label_send_cancellation_notification}
+                        </label>
+
+                        <div class="col-md-6">
+                            <div data-gx-widget="switcher">
+                                <input type="hidden" name="configuration[order_import/send_cancellation_notification]" value="0" />
+                                <input type="checkbox" id="configuration[order_import/send_cancellation_notification]" value="1" name="configuration[order_import/send_cancellation_notification]" class="form-control" {($content.configuration['order_import/send_cancellation_notification'] == '1') ? 'checked="checked"' : ''} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <h3>{$txt.title_tools}</h3>
+
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#galaxus-enable-all">
+            {$txt.button_enable_all_products}
+        </button><br><br>
+
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#galaxus-disable-all">
+            {$txt.button_disable_all_products}
+        </button>
+    </div>
+
+    <div class="modal fade" id="galaxus-enable-all" tabindex="-1" role="dialog" aria-labelledby="galaxusEnableAll">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="galaxusEnableAll">{$txt.button_enable_all_products}</h4>
+                </div>
+                <form method="post" action="admin.php?do=Galaxus/EnableAllProducts">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>{$txt.modal_enable_text}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{$txt.button_cancel}</button>
+                        <input type="submit" class="btn btn-danger" value="{$txt.button_enable_all_products}"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="galaxus-disable-all" tabindex="-1" role="dialog" aria-labelledby="galaxusDisableAll">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="galaxusDisableAll">{$txt.button_disable_all_products}</h4>
+                </div>
+                <form method="post" action="admin.php?do=Galaxus/DisableAllProducts">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>{$txt.modal_disable_text}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{$txt.button_cancel}</button>
+                        <input type="submit" class="btn btn-danger" value="{$txt.button_disable_all_products}"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div><br>Cronjob-URL: {$content.cronjob_url}</div>
+{/block}
+
+{block name="bottom_save_bar"}
+    <a href="admin.php?do=Galaxus" class="btn">{$btn.abort}</a>
+    <button class="btn btn-primary" form="galaxus-configuration-form">{$btn.save}</button>
+{/block}

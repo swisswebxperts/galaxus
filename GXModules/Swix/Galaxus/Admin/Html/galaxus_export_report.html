@@ -1,0 +1,69 @@
+{load_language_text section="swix_galaxus"}
+
+{if $export_meta_data|count > 0}
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="alert alert-info col-sm-12">
+                <b>{$txt.last_export}</b><br><br>
+
+                <div class="row file-list">
+                    <div class="col-sm-4"><b>{$txt.filename}</b></div>
+                    <div class="col-sm-3"><b>{$txt.date}</b></div>
+                    <div class="col-sm-3"><b>{$txt.record_count}</b></div>
+                    <div class="col-sm-2"><b>{$txt.validation}</b></div>
+
+                    {foreach item=$file from=$export_meta_data name=file}
+                        <div class="col-sm-4">{$file.basename}</div>
+                        <div class="col-sm-3">{$file.change_date|date_format:"%d.%m.%Y %H:%M:%S"}</div>
+                        <div class="col-sm-3">{$file.records_count}</div>
+                        <div class="col-sm-2 collapser-parent">
+                            {if $file.errors|count > 0}
+                                <div
+                                   data-gx-widget="collapser"
+                                   data-collapser-parent_selector=".collapser-parent"
+                                   data-collapser-target_selector=".errorlist{$smarty.foreach.file.index}"
+                                   data-collapser-additional_classes="pull-right"
+                                   data-collapser-collapsed="true"><i class="fas fa-exclamation-triangle" style="color:#CC0000"></i></div>
+                            {else}
+                                <div><i class="fa fa-check" style="color:#00AA00"></i></div>
+                            {/if}
+                        </div>
+                        {if $file.errors|count > 0}
+                            <div class="col-sm-12 errorlist{$smarty.foreach.file.index}">
+                                <div class="row">
+                                    {foreach item=$lines key=$errorName from=$file.errors name=error}
+                                        <div class="col-sm-12" style="background-color: lightyellow">
+                                            <div class="row collapser-parent">
+                                                <div class="col-sm-12"
+                                                     data-gx-widget="collapser"
+                                                     data-collapser-parent_selector=".row"
+                                                     data-collapser-target_selector=".linelist{$smarty.foreach.error.index}"
+                                                     data-collapser-additional_classes="pull-right"
+                                                     data-collapser-collapsed="true">
+                                                    <b>{$errorName} ({$lines|count})</b>
+                                                </div>
+                                            </div>
+                                            <div class="row linelist{$smarty.foreach.error.index}">
+                                                <div class="col-sm-1">{$txt.row}</div>
+                                                <div class="col-sm-1">{$txt.id}</div>
+                                                <div class="col-sm-10">{$txt.product}</div>
+                                                {foreach item=$line from=$lines}
+                                                    <div class="col-sm-1">{$line.line}</div>
+                                                    <div class="col-sm-1">{$line.products_id}</div>
+                                                    <div class="col-sm-10">
+                                                        <a href="categories.php?pID={$line.products_id}&action=new_product" target="_blank">{$line.products_name} <i class="fas fa-external-link-alt"></i></a>
+                                                    </div>
+                                                {/foreach}
+                                            </div>
+                                        </div>
+                                    {/foreach}
+                                </div>
+                            </div>
+                        {/if}
+
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+    </div>
+{/if}

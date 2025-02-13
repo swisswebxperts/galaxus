@@ -1,0 +1,22 @@
+Es muss ein Paketdienstleister eingerichtet werden für Swisspost. Falls weitere Versandvarianten für Galaxuskunden benötigt werden mit der Programmierung abklären.
+
+Name: Post
+Sendungstyp: swisspost
+URL: https://service.post.ch/EasyTrack/submitParcelData.do?p_language=de&formattedParcelCodes={TRACKING_NUMBER}
+
+
+
+Anpassung Bestellbestätigung für 'Lieferschein verlangt meldung'
+
+			<p style="float: left; width: 33%; text-align: right;">
+				<span style="font-size:12px;"><span style="font-family: verdana,geneva,sans-serif;">{if $PAYMENT_METHOD}<strong>Zahlungsmethode:</strong> {$PAYMENT_METHOD}<br />
+				{/if} <strong>Bestellnummer:</strong> {$oID}<br />
+				<strong>Bestelldatum:</strong> {$DATE}<br />
+				<br />
+				{if $csID}<strong>Kundennummer:</strong> {$csID}<br />
+				{/if}{$EMAIL}<br />
+				{if $PHONE}<strong>Telefonnummer:</strong> {$PHONE}<br />
+				{/if} {if $customer_vat}<strong>USt-IdNr.:</strong> {$customer_vat}<br />
+				{/if} {if $galaxus_delivery_note_required}<strong style="color:#cc0000">Lieferschein verlangt</strong><br />
+				{/if} </span></span>
+			</p>

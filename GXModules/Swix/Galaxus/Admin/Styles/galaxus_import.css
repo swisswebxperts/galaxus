@@ -1,0 +1,9 @@
+#galaxus_order_data {
+    width: 100%;
+    height: 400px;
+}
+
+.bg-yellow {
+    background-color: yellow;
+    padding: 10px 0;
+}

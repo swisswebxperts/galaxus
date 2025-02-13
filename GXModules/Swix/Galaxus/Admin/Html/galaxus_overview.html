@@ -1,0 +1,30 @@
+{extends file="get_usermod:layouts/main/layout.html"}
+
+{block name="content"}
+    {load_language_text section="swix_galaxus"}
+
+    {if $content.active == true}
+        {if $content.testmode}
+            <div class="alert alert-warning">{$txt.testmode_active}</div>
+        {else}
+            <div class="alert alert-success">{$txt.livemode_active}</div>
+        {/if}
+    {else}
+        <div class="alert alert-danger">{$txt.export_disabled}</div>
+    {/if}
+
+    <a href="/admin/admin.php?do=Galaxus/export" class="btn btn-default">{$txt.link_product_export}</a>
+
+    <br />
+    <br />
+
+    Cronjob-URL: {$content.cronjob_url}
+
+    <br />
+    <br />
+
+    {if $content.report != false}
+        {$content.report nofilter}
+    {/if}
+
+{/block}

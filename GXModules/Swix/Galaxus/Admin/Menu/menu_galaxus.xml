@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<!-- {load_language_text section="admin_menu" use_fallback=$smarty.const.SHOW_UNTRANSLATED_MENUITEMS} -->
+
+<admin_menu>
+	<menugroup id="BOX_HEADING_GALAXUS" sort="35" class="fa fa-google" title="{$txt.BOX_HEADING_GALAXUS|escape}">
+		<menuitem sort="10" link="admin.php" link_param="do=Galaxus" title="{$txt.BOX_GALAXUS_EXPORT|escape}" />
+		<menuitem sort="20" link="admin.php" link_param="do=GalaxusImport" title="{$txt.BOX_GALAXUS_IMPORT|escape}" />
+		<menuitem sort="20" link="admin.php" link_param="do=Galaxus/Configuration" title="{$txt.BOX_GALAXUS_CONFIGURATION|escape}" />
+	</menugroup>
+</admin_menu>
